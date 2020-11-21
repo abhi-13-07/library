@@ -1,0 +1,11 @@
+<h2>Search Authors</h2>
+<form action="/authors" method="GET">
+  <%- include("_form_fields") -%>
+  <input type="submit" value="Search">
+</form>
+<br>
+<% for( let i = 0; i < authors.length; i++ ) { %>
+  <div>
+    <p><%= authors[i].name %></p>
+  </div>
+<% } %>
