@@ -28,8 +28,13 @@ mongoose
 	.catch((err) => console.log(err.message));
 
 // setting up routes
+app.use('/', express.static('public'));
 app.use('/', indexRouter);
+
+app.use('/authors', express.static('public'));
 app.use('/authors', authorsRouter);
+
+app.use('/books', express.static('public'));
 app.use('/books', booksRouter);
 
 app.listen(process.env.PORT || 3000, () =>
