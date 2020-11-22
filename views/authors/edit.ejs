@@ -1,0 +1,6 @@
+<h2>Edit Author</h2>
+<%- include("../partials/error") -%>
+<form method="post" action="/authors/<%= author.id %>?_method=PUT">
+  <%- include("./_form_fields", {name: author.name}) -%>
+  <input type="submit" value="Change">
+</form>

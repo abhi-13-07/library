@@ -1,11 +1,13 @@
 <h2>Search Authors</h2>
+<%- include("../partials/error") -%>
 <form action="/authors" method="GET">
   <%- include("_form_fields") -%>
   <input type="submit" value="Search">
 </form>
 <br>
-<% for( let i = 0; i < authors.length; i++ ) { %>
-  <div>
-    <p><%= authors[i].name %></p>
-  </div>
-<% } %>
+<% authors.forEach(author => { %>
+  <div><%= author.name %></div>
+  <a href="/authors/<%= author.id %>">View</a>
+  <a href="/authors/<%= author.id %>/edit">Edit</a>
+  <%- include("../partials/deleteForm", { url: `/authors/${author.id}` }) -%>
+<% }) %>
