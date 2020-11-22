@@ -8,6 +8,7 @@ const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
 const authorsRouter = require('./routes/authors');
+const booksRouter = require('./routes/books');
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views');
@@ -29,6 +30,7 @@ mongoose
 // setting up routes
 app.use('/', indexRouter);
 app.use('/authors', authorsRouter);
+app.use('/books', booksRouter);
 
 app.listen(process.env.PORT || 3000, () =>
 	console.log('Server is running on port 3000')

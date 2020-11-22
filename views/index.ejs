@@ -1,1 +1,8 @@
-<h1>Hello World!!</h1>
+<h2>Recently Added</h2>
+<div>
+  <% books.forEach(book => { %>
+  <div>
+    <img height="150px" src="<%= book.coverImageLink %>" alt="<%= book.title + " cover image" %>">
+  </div>
+  <% }) %>
+</div>
