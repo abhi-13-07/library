@@ -1,4 +1,9 @@
 <h1><%= author.name %></h1>
+<div>
+  <a href="/authors/<%= author.id %>/edit">edit</a>
+  <%- include("../partials/deleteForm", {url: `/authors/${author.id}`}) -%>
+</div>
+<h3>Books by <%= author.name %></h3>
 <% if (books.length > 0) { %>
   <div>
     <% books.forEach(book => { %>
@@ -12,3 +17,6 @@
     <h3><%= author.name %> has not published any book yet.</h3>
   </div>
 <% } %>
+<div>
+  <a href="/books/new">Add Book</a>
+</div>

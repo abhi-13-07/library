@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const { findByIdAndDelete } = require('../models/author');
 const Author = require('../models/author');
 const Book = require('../models/book');
 
@@ -41,8 +40,7 @@ router.post('/new', async function (req, res) {
 router.get('/:id', async function (req, res) {
 	try {
 		const author = await Author.findById(req.params.id);
-		let books = await Book.find();
-		books = books.filter((book) => book.author.toString() == author._id);
+		let books = await Book.find({ author: req.params.id }).limit(6).exec();
 		res.render('authors/author', {
 			author: author,
 			books: books,
@@ -68,17 +66,18 @@ router.put('/:id', async function (req, res) {
 		});
 		res.redirect(`/authors/${updatedAuthor._id}`);
 	} catch {
-		res.redirect('/');
+		res.redirect(`/authors/${req.params.id}`);
 	}
 });
 
 router.delete('/:id', async function (req, res) {
 	try {
-		await Author.findByIdAndDelete(req.params.id);
+		const author = await Author.findById(req.params.id);
+		await author.remove();
 		res.redirect('/authors');
-	} catch {
+	} catch (err) {
 		res.render('authors/index', {
-			error: 'Error while deleting author',
+			error: err,
 			authors: await Author.find(),
 		});
 	}
