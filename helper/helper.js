@@ -2,15 +2,21 @@ const Author = require('../models/author');
 const imageMimieType = ['image/jpeg', 'image/png', 'image/gif'];
 
 module.exports = {
-	renderNewPage: async function (res, book, hasError = false) {
+	renderFormPage: async function (res, book, form, hasError = false) {
 		try {
 			const authors = await Author.find({});
 			const params = {
 				authors: authors,
 				book: book,
 			};
-			if (hasError) params.error = 'Error While Creating Book';
-			res.render('books/new', params);
+			if (hasError) {
+				if (form === 'edit') {
+					params.error = 'Error While Updating Book';
+				} else {
+					params.error = 'Error While Creating Book';
+				}
+			}
+			res.render(`books/${form}`, params);
 		} catch {
 			res.redirect('/books');
 		}

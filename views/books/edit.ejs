@@ -1,0 +1,11 @@
+<h2>Edit Book</h2>
+<%- include("../partials/error") -%>
+<form method="POST" action="/books/<%= book.id %>?_method=PUT">
+  <%- include("./_form_fields", {
+    title: book.title, 
+    publishedAt: book.publishedAt,
+    description: book.description,
+    noOfPages: book.noOfPages,
+    }) -%>
+  <input type="submit" value="Update">
+</form>
