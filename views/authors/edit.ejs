@@ -2,6 +2,8 @@
 <%- include("../partials/error") -%>
 <form method="post" action="/authors/<%= author.id %>?_method=PUT">
   <%- include("./_form_fields", {name: author.name}) -%>
-  <a href="/authors/<%= author.id %>">Cancel</a>
-  <input type="submit" value="Change">
+  <div class="form-row form-row-end btn-container">
+    <a class="btn btn-danger" href="/authors/<%= author.id %>">Cancel</a>
+    <input class="btn btn-primary" type="submit" value="Update">
+  </div>
 </form>

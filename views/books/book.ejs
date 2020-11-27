@@ -4,6 +4,8 @@
 <span>Published on: <%= new Date(book.publishedAt).toDateString() %></span>
 <p>Description: <%= book.description %></p>
 <span>Pages: <%= book.noOfPages%></span>
-<a href="/books/<%= book.id %>/edit">Edit</a>
-<%- include("../partials/deleteForm", {url: `/books/${book.id}`}) -%>
-<a href="/authors/<%= book.author.id %>">View Author</a>
+<div class="btn-container">
+  <a class="btn btn-primary" href="/authors/<%= book.author.id %>">View Author</a>
+  <a class="btn btn-primary" href="/books/<%= book.id %>/edit">Edit</a>
+  <%- include("../partials/deleteForm", {url: `/books/${book.id}`}) -%>
+</div>

@@ -1,7 +1,9 @@
 <h1><%= author.name %></h1>
 <div>
-  <a href="/authors/<%= author.id %>/edit">edit</a>
-  <%- include("../partials/deleteForm", {url: `/authors/${author.id}`}) -%>
+  <div class="btn-container">
+    <a class="btn btn-primary" href="/authors/<%= author.id %>/edit">edit</a>
+    <%- include("../partials/deleteForm", {url: `/authors/${author.id}`}) -%>
+  </div>
 </div>
 <h3>Books by <%= author.name %></h3>
 <% if (books.length > 0) { %>
@@ -20,5 +22,7 @@
   </div>
 <% } %>
 <div>
-  <a href="/books/new">Add Book</a>
+  <div>
+    <a class="btn btn-primary" href="/books/new">Add Book</a>
+  </div>
 </div>

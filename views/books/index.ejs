@@ -1,21 +1,25 @@
 <h2 class="page-header">All books</h2>
 <form method="GET">
-  <div>
-    <label for="">Title</label>
-    <input type="text" name="title" value="<%= typeof(queryParams.title) != null ? queryParams.title : "" %>">
+  <div class="form-row">
+    <div class="form-item">
+      <label for="">Title</label>
+      <input type="text" name="title" value="<%= typeof(queryParams.title) != null ? queryParams.title : "" %>">
+    </div>
   </div>
-  <div>
-    <label for="">Published After</label>
-    <input type="date" name="publishedAfter"
-      value="<%= typeof(queryParams.publishedAfter) != null ? queryParams.publishedAfter : "" %>">
+  <div class="form-row">
+    <div class="form-item">
+      <label for="">Published After</label>
+      <input type="date" name="publishedAfter"
+        value="<%= typeof(queryParams.publishedAfter) != null ? queryParams.publishedAfter : "" %>">
+    </div>
+    <div class="form-item">
+      <label for="">Published Before</label>
+      <input type="date" name="publishedBefore"
+        value="<%= typeof(queryParams.publishedBefore) != null ? queryParams.publishedBefore : "" %>">
+    </div>
   </div>
-  <div>
-    <label for="">Published Before</label>
-    <input type="date" name="publishedBefore"
-      value="<%= typeof(queryParams.publishedBefore) != null ? queryParams.publishedBefore : "" %>">
-  </div>
-  <div>
-    <input type="submit" value="Search">
+  <div class="form-row form-row-end btn-container">
+    <input class="btn btn-primary" type="submit" value="Search">
   </div>
 </form>
 <div>

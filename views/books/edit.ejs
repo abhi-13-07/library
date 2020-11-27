@@ -7,5 +7,8 @@
     description: book.description,
     noOfPages: book.noOfPages,
     }) -%>
-  <input type="submit" value="Update">
+  <div class="form-row form-row-end btn-container">
+    <a class="btn btn-danger" href="/books/<%= book.id %>">Cancel</a>
+    <input class="btn btn-primary" type="submit" value="Update">
+  </div>
 </form>

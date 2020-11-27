@@ -2,12 +2,14 @@
 <%- include("../partials/error") -%>
 <form action="/authors" method="GET">
   <%- include("_form_fields") -%>
-  <input class="btn btn-primary" type="submit" value="Search">
+  <div class="form-row form-row-end btn-container">
+    <input class="btn btn-primary" type="submit" value="Search">
+  </div>
 </form>
 <br>
 <% authors.forEach(author => { %>
   <div><%= author.name %></div>
-  <div class="btn-container">
+  <div class="btn-container form-row form-row-end">
     <a class="btn btn-primary" href="/authors/<%= author.id %>">View</a>
     <a class="btn btn-primary" href="/authors/<%= author.id %>/edit">Edit</a>
     <%- include("../partials/deleteForm", { url: `/authors/${author.id}` }) -%>
