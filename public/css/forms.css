@@ -7,7 +7,7 @@
 
 .form-row {
 	display: flex;
-	margin: 0.5rem;
+	margin: 0.5rem 0;
 }
 
 .form-row-end {
@@ -23,7 +23,7 @@
 }
 
 .form-item:first-child {
-	margin-left: 0;
+	margin: 0;
 }
 
 .form-item-no-grow {

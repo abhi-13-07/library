@@ -1,8 +1,10 @@
 @import './variable.css';
 @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto&display=swap');
 @import './header.css';
-@import './button.css';
-@import './form.css';
+@import './buttons.css';
+@import './forms.css';
+@import './author.css';
+@import './books.css';
 
 *,
 *::before,
@@ -36,4 +38,8 @@ body {
 .page-header {
 	font-size: 2rem;
 	font-weight: 500;
+}
+
+.error-msg {
+	color: hsl(var(--danger-color-hue), 100%, 50%);
 }

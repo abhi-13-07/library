@@ -8,13 +8,7 @@
 <h3>Books by <%= author.name %></h3>
 <% if (books.length > 0) { %>
   <div>
-    <% books.forEach(book => { %>
-    <div>
-      <a href="/books/<%= book.id %>">
-        <img height="150" width="100" src="<%= book.coverImageLink %>" alt="<%= book.title + " cover image" %>">
-      </a>
-    </div>
-    <% }) %>
+    <%- include("../partials/bookGrid") -%>
   </div>
 <% } else { %>
   <div>

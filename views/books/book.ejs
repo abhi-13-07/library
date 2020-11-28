@@ -1,11 +1,21 @@
-<h2>Title: <%= book.title %></h2>
-<img height="150px" width="100px" src="<%= book.coverImageLink %>" alt="<%= book.title + " cover image" %>">
-<span>Author: <%= book.author.name %></span><br>
-<span>Published on: <%= new Date(book.publishedAt).toDateString() %></span>
-<p>Description: <%= book.description %></p>
-<span>Pages: <%= book.noOfPages%></span>
-<div class="btn-container">
-  <a class="btn btn-primary" href="/authors/<%= book.author.id %>">View Author</a>
-  <a class="btn btn-primary" href="/books/<%= book.id %>/edit">Edit</a>
-  <%- include("../partials/deleteForm", {url: `/books/${book.id}`}) -%>
+<h2><%= book.title %></h2>
+<div class="book-details">
+  <div>
+    <img class="book-cover" src="<%= book.coverImageLink %>" alt="<%= book.title + " cover image" %>">
+    <div class="book-details-btn-container">
+      <a class="btn btn-primary" href="/books/<%= book.id %>/edit">Edit</a>
+      <%- include("../partials/deleteForm", {url: `/books/${book.id}`}) -%>
+      <a class="btn btn-primary book-details-auth-btn" href="/authors/<%= book.author.id %>">View Author</a>
+    </div>
+  </div>
+  <div class="book-details-container">
+    <div class="label">Author:</div>
+    <div><%= book.author.name %></div>
+    <div class="label">Published on:</div>
+    <div><%= new Date(book.publishedAt).toDateString() %></div>
+    <p class="label">Description:</p>
+    <div><%= book.description %></div>
+    <div class="label">Pages:</div>
+    <div><%= book.noOfPages%></div>
+  </div>
 </div>
