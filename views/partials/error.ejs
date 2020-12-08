@@ -1,5 +1,13 @@
-<% if (locals.error != null) { %>
+<% if (messages.error) { %>
+  <% for( let i = 0; i <messages.error.length; i++ ) { %>
+    <div>
+      <p class="error-msg"><%= messages.error[i] %></p>
+    </div>
+  <% } %>
+<% } %>
+
+<% if (messages.success) { %>
   <div>
-    <p class="error-msg"><%= error %></p>
+    <p><%= messages.success %></p>
   </div>
 <% } %>

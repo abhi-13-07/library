@@ -2,7 +2,7 @@ const Author = require('../models/author');
 const imageMimieType = ['image/jpeg', 'image/png', 'image/gif'];
 
 module.exports = {
-	renderFormPage: async function (res, book, form, hasError = false) {
+	renderFormPage: async function (req, res, book, form, hasError = false) {
 		try {
 			const authors = await Author.find({});
 			const params = {
@@ -16,6 +16,10 @@ module.exports = {
 					params.error = 'Error While Creating Book';
 				}
 			}
+			if (req.isAuthenticated()) {
+				params.auth = true;
+				params.user = req.user;
+			}
 			res.render(`books/${form}`, params);
 		} catch {
 			res.redirect('/books');
@@ -28,5 +32,12 @@ module.exports = {
 			book.coverImage = new Buffer.from(cover.data, 'base64');
 			book.coverImageType = cover.type;
 		}
+	},
+	renderPage: function (req, res, page, params) {
+		if (req.isAuthenticated()) {
+			params.auth = true;
+			params.user = user;
+		}
+		res.render(page, params);
 	},
 };

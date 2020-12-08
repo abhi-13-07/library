@@ -2,15 +2,18 @@ const router = require('express').Router();
 const Author = require('../models/author');
 const Book = require('../models/book');
 
+const renderPage = require('../helper/helper').renderPage;
+
 // get all authors route: /authors
 router.get('/', async function (req, res) {
 	const searchOptions = {};
-	if (req.query.name !== null && req.query.name != '') {
+	if (req.query.name !== null && req.query.name !== '') {
 		searchOptions.name = new RegExp(req.query.name, 'i');
 	}
 	try {
 		const authors = await Author.find(searchOptions);
-		res.render('authors/index', { authors, name: req.query.name });
+		const params = { authors, name: req.query.name };
+		renderPage(req, res, 'authors/index', params);
 	} catch (err) {
 		res.redirect('/');
 	}
@@ -18,7 +21,8 @@ router.get('/', async function (req, res) {
 
 // new author route: /authors/new
 router.get('/new', function (req, res) {
-	res.render('authors/new');
+	const params = {};
+	renderPage(req, res, 'authors/new', params);
 });
 
 // create new author route: /authors/new
@@ -41,10 +45,11 @@ router.get('/:id', async function (req, res) {
 	try {
 		const author = await Author.findById(req.params.id);
 		let books = await Book.find({ author: req.params.id }).limit(6).exec();
-		res.render('authors/author', {
+		const params = {
 			author: author,
 			books: books,
-		});
+		};
+		renderPage(req, res, 'authors/author', params);
 	} catch {
 		res.redirect('/');
 	}
@@ -53,7 +58,10 @@ router.get('/:id', async function (req, res) {
 router.get('/:id/edit', async function (req, res) {
 	try {
 		const author = await Author.findById(req.params.id);
-		res.render('authors/edit', { author: author });
+		const params = {
+			author: author,
+		};
+		renderPage(req, res, 'author/edit', params);
 	} catch {
 		res.redirect('/');
 	}

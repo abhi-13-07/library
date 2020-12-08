@@ -5,9 +5,14 @@ router.get('/', async function (req, res) {
 	let books = [];
 	try {
 		books = await Book.find().sort({ createdAt: 'desc' }).limit(10);
-		res.render('index', {
+		const params = {
 			books: books,
-		});
+		};
+		if (req.isAuthenticated()) {
+			params.auth = true;
+			params.user = req.user;
+		}
+		res.render('index', params);
 	} catch {
 		res.redirect('/');
 	}

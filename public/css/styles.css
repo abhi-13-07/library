@@ -43,3 +43,8 @@ body {
 .error-msg {
 	color: hsl(var(--danger-color-hue), 100%, 50%);
 }
+
+.links {
+	text-decoration: none;
+	color: var(--color-text-light);
+}

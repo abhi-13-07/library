@@ -4,6 +4,7 @@ const Author = require('../models/author');
 
 const renderFormPage = require('../helper/helper').renderFormPage;
 const saveCover = require('../helper/helper').saveCover;
+const renderPage = require('../helper/helper').renderPage;
 
 // get all books route: /books
 router.get('/', async function (req, res) {
@@ -19,10 +20,11 @@ router.get('/', async function (req, res) {
 	}
 	try {
 		const books = await query.exec();
-		res.render('books/index', {
+		const params = {
 			books: books,
 			queryParams: req.query,
-		});
+		};
+		renderPage(req, res, 'books/index', params);
 	} catch {
 		res.redirect('/');
 	}
@@ -30,7 +32,7 @@ router.get('/', async function (req, res) {
 
 // new book route: /books/new
 router.get('/new', async function (req, res) {
-	renderFormPage(res, new Book(), 'new');
+	renderFormPage(req, res, new Book(), 'new');
 });
 
 // create new book route: /books/new

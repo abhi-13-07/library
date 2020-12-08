@@ -1,0 +1,22 @@
+<h2>Login</h2>
+<%- include("../partials/error") -%>
+<form method="post">
+  <div class="form-row">
+    <div class="form-item">
+      <label for="">Email</label>
+      <input type="text" name="email" class="">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-item">
+      <label for="">Password</label>
+      <input type="password" name="password" class="">
+    </div>
+  </div>
+  <div>
+    <a class="links" href="/users/register">new user,don't have an  accout?</a>
+  </div>
+  <div class="form-row form-row-end">
+    <input type="submit" value="Login" class="btn btn-primary">
+  </div>
+</form>
