@@ -61,7 +61,7 @@ router.get('/:id/edit', async function (req, res) {
 		const params = {
 			author: author,
 		};
-		renderPage(req, res, 'author/edit', params);
+		renderPage(req, res, 'authors/edit', params);
 	} catch {
 		res.redirect('/');
 	}

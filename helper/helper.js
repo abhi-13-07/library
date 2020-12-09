@@ -1,12 +1,12 @@
-const Author = require('../models/author');
+const User = require('../models/user');
 const imageMimieType = ['image/jpeg', 'image/png', 'image/gif'];
 
 module.exports = {
 	renderFormPage: async function (req, res, book, form, hasError = false) {
 		try {
-			const authors = await Author.find({});
+			const author = await User.findOne({ _id: req.user.id });
 			const params = {
-				authors: authors,
+				author: author,
 				book: book,
 			};
 			if (hasError) {

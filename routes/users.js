@@ -40,12 +40,19 @@ router.post(
 			const salt = await bcrypt.genSalt(10);
 			const hassedPassword = await bcrypt.hash(password1, salt);
 			user.password = hassedPassword;
-			await user.save();
+			const newUser = await user.save();
+			req.flash('success', `Now you can log in with ${newUser.email}`);
 			res.redirect('/users/login');
 		} catch {
 			res.redirect('/');
 		}
 	}
 );
+
+router.get('/logout', function (req, res) {
+	req.logout();
+	req.flash('success', "You've Logged Out");
+	res.redirect('/');
+});
 
 module.exports = router;

@@ -13,6 +13,15 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	profilePic: {
+		type: Buffer,
+	},
+	profilePicType: {
+		type: String,
+	},
+	bio: {
+		type: String,
+	},
 });
 
 module.exports = mongoose.model('User', userSchema);

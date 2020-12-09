@@ -7,7 +7,7 @@ const bookSchema = new mongoose.Schema({
 	},
 	author: {
 		type: mongoose.Schema.Types.ObjectId,
-		ref: 'Author',
+		ref: 'User',
 		required: true,
 	},
 	noOfPages: {

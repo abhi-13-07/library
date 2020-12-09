@@ -8,6 +8,12 @@
 
 <% if (messages.success) { %>
   <div>
-    <p><%= messages.success %></p>
+    <p class="success-msg"><%= messages.success %></p>
+  </div>
+<% } %>
+
+<% if (messages.info) { %>
+  <div>
+    <p class="info-msg"><%= messages.info %></p>
   </div>
 <% } %>

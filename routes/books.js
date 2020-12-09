@@ -6,6 +6,8 @@ const renderFormPage = require('../helper/helper').renderFormPage;
 const saveCover = require('../helper/helper').saveCover;
 const renderPage = require('../helper/helper').renderPage;
 
+const restrictUnAuth = require('../middlewares/restrictions').restrictUnAuth;
+
 // get all books route: /books
 router.get('/', async function (req, res) {
 	let query = Book.find();
@@ -31,12 +33,12 @@ router.get('/', async function (req, res) {
 });
 
 // new book route: /books/new
-router.get('/new', async function (req, res) {
+router.get('/new', restrictUnAuth, async function (req, res) {
 	renderFormPage(req, res, new Book(), 'new');
 });
 
 // create new book route: /books/new
-router.post('/new', async function (req, res) {
+router.post('/new', restrictUnAuth, async function (req, res) {
 	const {
 		title,
 		author,
@@ -60,30 +62,36 @@ router.post('/new', async function (req, res) {
 		res.redirect(`/books/${newBook.id}`);
 	} catch (err) {
 		console.log(err.message);
-		renderNewPage(res, new Book(), true);
+		renderPage(res, new Book(), true);
 	}
 });
 
 router.get('/:id', async function (req, res) {
 	try {
 		const book = await Book.findById(req.params.id).populate('author').exec();
-		res.render('books/book', { book: book });
+		const params = { book: book };
+		renderPage(req, res, 'books/book', params);
 	} catch (err) {
 		console.log(err);
 		res.redirect('/');
 	}
 });
 
-router.get('/:id/edit', async function (req, res) {
+router.get('/:id/edit', restrictUnAuth, async function (req, res) {
 	try {
 		const book = await Book.findById(req.params.id);
-		renderFormPage(res, book, 'edit');
+		if (req.user.id === book.author) {
+			renderFormPage(req, res, book, 'edit');
+		} else {
+			req.flash('info', 'You are not allowed to access this page');
+			res.redirect('/books');
+		}
 	} catch {
 		res.redirect('/books');
 	}
 });
 
-router.put('/:id', async function (req, res) {
+router.put('/:id', restrictUnAuth, async function (req, res) {
 	let book = null;
 	const {
 		title,
@@ -114,7 +122,7 @@ router.put('/:id', async function (req, res) {
 	}
 });
 
-router.delete('/:id', async function (req, res) {
+router.delete('/:id', restrictUnAuth, async function (req, res) {
 	let book = null;
 	try {
 		book = await Book.findById(req.params.id);
